@@ -1,0 +1,20 @@
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #FF0000; background-color: #FFAAAA">#</span> Definition <span style="color: #008800; font-weight: bold">for</span> a  binary tree node
+<span style="color: #FF0000; background-color: #FFAAAA">#</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">TreeNode</span><span style="color: #333333">:</span>
+<span style="color: #FF0000; background-color: #FFAAAA">#</span>     def __init__<span style="color: #333333">(</span>self<span style="color: #333333">,</span> x<span style="color: #333333">):</span>
+<span style="color: #FF0000; background-color: #FFAAAA">#</span>         self<span style="color: #333333">.</span><span style="color: #0000CC">val</span> <span style="color: #333333">=</span> x
+<span style="color: #FF0000; background-color: #FFAAAA">#</span>         self<span style="color: #333333">.</span><span style="color: #0000CC">left</span> <span style="color: #333333">=</span> None
+<span style="color: #FF0000; background-color: #FFAAAA">#</span>         self<span style="color: #333333">.</span><span style="color: #0000CC">right</span> <span style="color: #333333">=</span> None
+<span style="color: #FF0000; background-color: #FFAAAA">#</span>         self<span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">=</span> None
+
+<span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">Solution</span><span style="color: #333333">:</span>
+    <span style="color: #FF0000; background-color: #FFAAAA">#</span> <span style="color: #555555; font-weight: bold">@param</span> root<span style="color: #333333">,</span> a tree node
+    <span style="color: #FF0000; background-color: #FFAAAA">#</span> <span style="color: #555555; font-weight: bold">@return</span> nothing
+    def <span style="color: #0066BB; font-weight: bold">connect</span><span style="color: #333333">(</span>self<span style="color: #333333">,</span> root<span style="color: #333333">):</span>
+        <span style="color: #008800; font-weight: bold">if</span> root <span style="color: #333333">==</span> None or root<span style="color: #333333">.</span><span style="color: #0000CC">left</span> <span style="color: #333333">==</span> <span style="color: #997700; font-weight: bold">None:</span>
+            <span style="color: #008800; font-weight: bold">return</span>
+        root<span style="color: #333333">.</span><span style="color: #0000CC">left</span><span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">=</span> root<span style="color: #333333">.</span><span style="color: #0000CC">right</span>
+        <span style="color: #008800; font-weight: bold">if</span> root<span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">!=</span> <span style="color: #997700; font-weight: bold">None:</span>
+            root<span style="color: #333333">.</span><span style="color: #0000CC">right</span><span style="color: #333333">.</span><span style="color: #0000CC">next</span> <span style="color: #333333">=</span> root<span style="color: #333333">.</span><span style="color: #0000CC">next</span><span style="color: #333333">.</span><span style="color: #0000CC">left</span>
+        self<span style="color: #333333">.</span><span style="color: #0000CC">connect</span><span style="color: #333333">(</span>root<span style="color: #333333">.</span><span style="color: #0000CC">left</span><span style="color: #333333">)</span>
+        self<span style="color: #333333">.</span><span style="color: #0000CC">connect</span><span style="color: #333333">(</span>root<span style="color: #333333">.</span><span style="color: #0000CC">right</span><span style="color: #333333">)</span>
+</pre></div>

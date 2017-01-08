@@ -1,0 +1,53 @@
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">canFinish</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> numCourses<span style="color: #333333">,</span> <span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[][]</span> prerequisites<span style="color: #333333">)</span> <span style="color: #333333">{</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>prerequisites <span style="color: #333333">==</span> <span style="color: #008800; font-weight: bold">null</span><span style="color: #333333">){</span>
+        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">IllegalArgumentException</span><span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;illegal prerequisites array&quot;</span><span style="color: #333333">);</span>
+    <span style="color: #333333">}</span>
+ 
+    <span style="color: #333399; font-weight: bold">int</span> len <span style="color: #333333">=</span> prerequisites<span style="color: #333333">.</span><span style="color: #0000CC">length</span><span style="color: #333333">;</span>
+ 
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>numCourses <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #333333">||</span> len <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">){</span>
+        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+ 
+    <span style="color: #888888">//track visited courses</span>
+    <span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]</span> visit <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[</span>numCourses<span style="color: #333333">];</span>
+ 
+    <span style="color: #888888">// use the map to store what courses depend on a course </span>
+    HashMap<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">,</span>ArrayList<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">&gt;&gt;</span> map <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> HashMap<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">,</span>ArrayList<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">&gt;&gt;();</span>
+    <span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]</span> <span style="color: #997700; font-weight: bold">a:</span> prerequisites<span style="color: #333333">){</span>
+        <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>map<span style="color: #333333">.</span><span style="color: #0000CC">containsKey</span><span style="color: #333333">(</span>a<span style="color: #333333">[</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">])){</span>
+            map<span style="color: #333333">.</span><span style="color: #0000CC">get</span><span style="color: #333333">(</span>a<span style="color: #333333">[</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">]).</span><span style="color: #0000CC">add</span><span style="color: #333333">(</span>a<span style="color: #333333">[</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">]);</span>
+        <span style="color: #333333">}</span><span style="color: #008800; font-weight: bold">else</span><span style="color: #333333">{</span>
+            ArrayList<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">&gt;</span> l <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> ArrayList<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">&gt;();</span>
+            l<span style="color: #333333">.</span><span style="color: #0000CC">add</span><span style="color: #333333">(</span>a<span style="color: #333333">[</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">]);</span>
+            map<span style="color: #333333">.</span><span style="color: #0000CC">put</span><span style="color: #333333">(</span>a<span style="color: #333333">[</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">],</span> l<span style="color: #333333">);</span>
+        <span style="color: #333333">}</span>
+    <span style="color: #333333">}</span>
+ 
+    <span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span><span style="color: #333333">;</span> i<span style="color: #333333">&lt;</span>numCourses<span style="color: #333333">;</span> i<span style="color: #333333">++){</span>
+        <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>canFinishDFS<span style="color: #333333">(</span>map<span style="color: #333333">,</span> visit<span style="color: #333333">,</span> i<span style="color: #333333">))</span>
+            <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">false</span><span style="color: #333333">;</span>
+    <span style="color: #333333">}</span>
+ 
+    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
+<span style="color: #333333">}</span>
+ 
+<span style="color: #008800; font-weight: bold">private</span> <span style="color: #333399; font-weight: bold">boolean</span> <span style="color: #0066BB; font-weight: bold">canFinishDFS</span><span style="color: #333333">(</span>HashMap<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">,</span>ArrayList<span style="color: #333333">&lt;</span>Integer<span style="color: #333333">&gt;&gt;</span> map<span style="color: #333333">,</span> <span style="color: #333399; font-weight: bold">int</span><span style="color: #333333">[]</span> visit<span style="color: #333333">,</span> <span style="color: #333399; font-weight: bold">int</span> i<span style="color: #333333">){</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>visit<span style="color: #333333">[</span>i<span style="color: #333333">]==-</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">)</span> 
+        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">false</span><span style="color: #333333">;</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>visit<span style="color: #333333">[</span>i<span style="color: #333333">]==</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">)</span> 
+        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
+ 
+    visit<span style="color: #333333">[</span>i<span style="color: #333333">]=-</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">;</span>
+    <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span>map<span style="color: #333333">.</span><span style="color: #0000CC">containsKey</span><span style="color: #333333">(</span>i<span style="color: #333333">)){</span>
+        <span style="color: #008800; font-weight: bold">for</span><span style="color: #333333">(</span><span style="color: #333399; font-weight: bold">int</span> <span style="color: #997700; font-weight: bold">j:</span> map<span style="color: #333333">.</span><span style="color: #0000CC">get</span><span style="color: #333333">(</span>i<span style="color: #333333">)){</span>
+            <span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(!</span>canFinishDFS<span style="color: #333333">(</span>map<span style="color: #333333">,</span> visit<span style="color: #333333">,</span> j<span style="color: #333333">))</span> 
+                <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">false</span><span style="color: #333333">;</span>
+        <span style="color: #333333">}</span>
+    <span style="color: #333333">}</span>
+ 
+    visit<span style="color: #333333">[</span>i<span style="color: #333333">]=</span><span style="color: #0000DD; font-weight: bold">1</span><span style="color: #333333">;</span>
+ 
+    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">true</span><span style="color: #333333">;</span>
+<span style="color: #333333">}</span>
+</pre></div>
